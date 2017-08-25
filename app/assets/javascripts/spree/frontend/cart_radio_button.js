@@ -16,6 +16,7 @@ CartRadioButton.prototype.bindEvents = function() {
 CartRadioButton.prototype.toggleDiv = function($checkBox) {
   $($checkBox.val()).show();
   this.hideOtherDivs();
+  //setPurchaseOptions($checkBox.val());
 };
 
 CartRadioButton.prototype.hideOtherDivs = function() {
