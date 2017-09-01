@@ -11,8 +11,8 @@
 	  	</div>
 	  	<% if @product.is_sample %>
 	  	<div id="cart_checkboxes" class="form-group">
-	    	<%= radio_button_tag :cart, ".add-to-cart_trial", class: "cart_radio_button" %>
-	    	<%= label_tag "cart_.add-to-cart_trial".to_s, Spree.t(:sample), id: "cart_.add-to-cart_trial" %>
+	    	<%= radio_button_tag :cart, ".add-to-cart_trial", true, class: "cart_radio_button" %>
+	    	<%= label_tag "cart_.add-to-cart_trial".to_s, Spree.t(:sample), id: "cart_.add-to-cart" %>
 	  	</div>
 	  	<% end %>
 	<% end %>
@@ -33,8 +33,8 @@
 	    	<%= label_tag "cart_.subscription_autoship_options".to_s, Spree.t(:one_unit_autoship_supply) %>
 	  	</div>
 	  	<div id="cart_checkboxes" class="form-group">
-	    	<%= radio_button_tag :cart, ".add-to-cart_bff", class: "cart_radio_button" %>
-	    	<%= label_tag "cart_.add-to-cart_bff".to_s, Spree.t(:buy_for_friend), id: "cart_.add-to-cart_bff" %>
+	    	<%= radio_button_tag :cart, ".add-to-cart_bff", true, class: "cart_radio_button" %>
+	    	<%= label_tag "cart_.add-to-cart".to_s, Spree.t(:buy_for_friend), id: "cart_.add-to-cart_bff" %>
 	  	</div>
 	  	<% if @product.is_sample %>
 	  	<div id="cart_checkboxes" class="form-group">
