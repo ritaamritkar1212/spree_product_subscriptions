@@ -3,7 +3,7 @@
 	<br><br>
 	  	<div id="cart_checkboxes" class="form-group">
 	    	<%= radio_button_tag :cart, ".add-to-cart", true, class: "cart_radio_button" %>
-	    	<%= label_tag "cart_.add-to-cart".to_s, Spree.t(:six_single_units), id: "cart_.add-to-cart", true %>
+	    	<%= label_tag "cart_.add-to-cart".to_s, Spree.t(:six_single_units), id: "cart_.add-to-cart" %>
 	  	</div>
 		<div id="subscription_checkboxes" class="form-group">
 	    	<%= radio_button_tag :cart, ".subscription_autoship_options", false, class: "cart_radio_button" %>
@@ -11,7 +11,7 @@
 	  	</div>
 	  	<% if @product.is_sample %>
 	  	<div id="cart_checkboxes" class="form-group">
-	    	<%= radio_button_tag :cart, ".add-to-cart_trial", true, class: "cart_radio_button" %>
+	    	<%= radio_button_tag :cart, ".add-to-cart_trial", class: "cart_radio_button" %>
 	    	<%= label_tag "cart_.add-to-cart_trial".to_s, Spree.t(:sample), id: "cart_.add-to-cart_trial" %>
 	  	</div>
 	  	<% end %>
@@ -20,7 +20,7 @@
 	<% if @product.subscribable? %>
 	  <br><br>
 	  	<div id="cart_checkboxes" class="form-group">
-	    	<%= radio_button_tag :cart, ".add-to-cart", true, class: "cart_radio_button",true %>
+	    	<%= radio_button_tag :cart, ".add-to-cart", true, class: "cart_radio_button" %>
 	    	<%= label_tag "cart_.add-to-cart".to_s, Spree.t(:one_month_supply), id: "cart_.add-to-cart" %>
 	  	</div>
 	  	<div id="subscription_checkboxes" class="form-group">
@@ -33,12 +33,12 @@
 	    	<%= label_tag "cart_.subscription_autoship_options".to_s, Spree.t(:one_unit_autoship_supply) %>
 	  	</div>
 	  	<div id="cart_checkboxes" class="form-group">
-	    	<%= radio_button_tag :cart, ".add-to-cart_bff", true, class: "cart_radio_button" %>
+	    	<%= radio_button_tag :cart, ".add-to-cart_bff", class: "cart_radio_button" %>
 	    	<%= label_tag "cart_.add-to-cart_bff".to_s, Spree.t(:buy_for_friend), id: "cart_.add-to-cart_bff" %>
 	  	</div>
 	  	<% if @product.is_sample %>
 	  	<div id="cart_checkboxes" class="form-group">
-	    	<%= radio_button_tag :cart, ".add-to-cart_trial", true, class: "cart_radio_button" %>
+	    	<%= radio_button_tag :cart, ".add-to-cart_trial", class: "cart_radio_button" %>
 	    	<%= label_tag "cart_.add-to-cart_trial".to_s, Spree.t(:sample), id: "cart_.add-to-cart_trial" %>
 	  	</div>
 	  	<% end %>
