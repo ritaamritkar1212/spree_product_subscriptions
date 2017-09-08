@@ -13,10 +13,9 @@
       <%= number_field :subscription, :delivery_number, class: "form-control", min: 1, value: 3 %>
     </span>
     <br>
-    <span>
       <%= label_tag :subscription, Spree.t(:quantity) %><span class="required">*</span>
       <br>
-      <%= number_field_tag :quantity, 1, class: 'title form-control', min: 1 %>
+      <%= number_field_tag :quantity_three, 1, class: 'title form-control', min: 1 %>
     </span>
     <br>
     <span class='input-group-btn'>
@@ -28,22 +27,22 @@
 
   <div class="subscription_autoship_options" style="display: none;">
     <br><br>
-    <% subscription = Spree::Subscription.new %>
+    <% subscription_auto = Spree::Subscription.new %>
     <span>
-      <%= label_tag :subscription, Spree.t(:recurring_delivery_interval) %><span class="required">*</span>
-      <%= collection_select :subscription, :subscription_frequency_id, @product.subscription_frequencies, :id, :title, {}, { class: "form-control" } %>
+      <%= label_tag :subscription_auto, Spree.t(:recurring_delivery_interval) %><span class="required">*</span>
+      <%= collection_select :subscription_auto, :subscription_frequency_id, @product.subscription_frequencies, :id, :title, {}, { class: "form-control" } %>
     </span>
     <br>
     <span>
-      <%= label_tag :subscription, Spree.t(:total_deliveries) %><span class="required">*</span>
+      <%= label_tag :subscription_auto, Spree.t(:total_deliveries) %><span class="required">*</span>
       <br>
-      <%= number_field :subscription, :delivery_number, class: "form-control", min: 1, value: 12 %>
+      <%= number_field :subscription_auto, :delivery_number, class: "form-control", min: 1, value: 12 %>
     </span>
     <br>
     <span>
-      <%= label_tag :subscription, Spree.t(:quantity) %><span class="required">*</span>
+      <%= label_tag :subscription_auto, Spree.t(:quantity) %><span class="required">*</span>
       <br>
-      <%= number_field_tag :quantity, 1, class: 'title form-control', min: 1 %>
+      <%= number_field_tag :quantity_auto, 1, class: 'title form-control', min: 1 %>
     </span>
     <br>
     <span class='input-group-btn'>
