@@ -13,6 +13,12 @@ Spree::OrdersController.class_eval do
       is_subscribed = params.fetch(:subscribe, "").present?
 
       existing_options = {options: params.fetch(:options, {}).permit!}
+      if params[:cart] == ".subscription_options"
+        params[:subscription][:delivery_number] = params[:subscription][:delivery_number_three] 
+        params[:quantity] = params[:quantity_three]
+        params[:subscription][:subscription_frequency_id] = params[:subscription][:subscription_frequency_id_three]
+      end
+      params[:quantity] = params[:quantity_auto] if params[:cart] == ".subscription_autoship_options"
       updated_subscription_params = params.fetch(:subscription, {}).merge({subscribe: is_subscribed}).permit!
       existing_options[:options].merge!(updated_subscription_params)
       updated_params = params.merge!(existing_options)
