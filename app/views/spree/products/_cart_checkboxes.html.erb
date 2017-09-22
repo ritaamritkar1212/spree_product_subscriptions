@@ -1,46 +1,71 @@
 <% if current_user_is_a_doctor? %>
+	<% @Purchaseoptions = Spree::PurchaseOption.where(role: 'doctor') %>
 	<% if @product.subscribable? %>
 	<br><br>
-	  	<div id="cart_checkboxes" class="form-group">
-	    	<%= radio_button_tag :cart, ".add-to-cart", true, class: "cart_radio_button" %>
-	    	<%= label_tag "cart_.add-to-cart".to_s, Spree.t(:six_single_units), id: "cart_.add-to-cart" %>
-	  	</div>
-		<div id="subscription_checkboxes" class="form-group">
-	    	<%= radio_button_tag :cart, ".subscription_autoship_options", false, class: "cart_radio_button" %>
-	    	<%= label_tag "cart_.subscription_autoship_options".to_s, Spree.t(:twelve_units_autoship_supply) %>
-	  	</div>
-	  	<% if @product.is_sample %>
-	  	<div id="cart_checkboxes" class="form-group">
-	    	<%= radio_button_tag :cart, ".add-to-cart_trial", true, class: "cart_radio_button" %>
-	    	<%= label_tag "cart_.add-to-cart_trial".to_s, Spree.t(:sample), id: "cart_.add-to-cart" %>
-	  	</div>
-	  	<% end %>
+		<% @Purchaseoptions.each_with_index do |p,index| %>
+			<% if p.promo_code == 'SIXSINGLE' %>
+			  	<div id="cart_checkboxes" class="form-group">
+			    	<%= radio_button_tag :cart, ".add-to-cart", true, class: "cart_radio_button" %>
+			    	<%= label_tag "cart_.add-to-cart".to_s, Spree.t(:six_single_units), id: "cart_.add-to-cart" %>
+			  	</div>
+			<% elsif p.promo_code == 'TWELVEFREE' %>
+				<div id="subscription_checkboxes" class="form-group">
+			    	<%= radio_button_tag :cart, ".subscription_autoship_options", false, class: "cart_radio_button" %>
+			    	<%= label_tag "cart_.subscription_autoship_options".to_s, Spree.t(:twelve_units_autoship_supply) %>
+			  	</div>
+			<% else %>
+			  	<% if @product.is_sample %>
+				  	<div id="cart_checkboxes" class="form-group">
+				    	<%= radio_button_tag :cart, ".add-to-cart_trial", true, class: "cart_radio_button" %>
+				    	<%= label_tag "cart_.add-to-cart_trial".to_s, Spree.t(:sample), id: "cart_.add-to-cart" %>
+				  	</div>
+				<% elsif p.promo_code != 'TRIAL' %>
+					<div id="cart_checkboxes" class="form-group">
+						<%= radio_button_tag :cart, p.id, true, class: "cart_radio_button" %>
+						<%= label_tag ("cart_.add-to-cart_"+p.id.to_s).to_s, p.name, id: "cart_.add-to-cart_"+p.id.to_s %>
+					</div>
+			  	<% end %>
+			 <% end %>
+		<% end %>
 	<% end %>
 <% else %>
+	<% @Purchaseoptions = Spree::PurchaseOption.where(role: 'user') %>
 	<% if @product.subscribable? %>
 	  <br><br>
-	  	<div id="cart_checkboxes" class="form-group">
-	    	<%= radio_button_tag :cart, ".add-to-cart", true, class: "cart_radio_button" %>
-	    	<%= label_tag "cart_.add-to-cart".to_s, Spree.t(:one_month_supply), id: "cart_.add-to-cart" %>
-	  	</div>
-	  	<div id="subscription_checkboxes" class="form-group">
-	    	<%= radio_button_tag :cart, ".subscription_options", false, class: "cart_radio_button" %>
-	    	<%= label_tag "cart_.subscription_options".to_s, Spree.t(:three_month_supply) %>
-	  	</div>
-
-	  	<div id="subscription_checkboxes" class="form-group">
-	    	<%= radio_button_tag :cart, ".subscription_autoship_options", false, class: "cart_radio_button" %>
-	    	<%= label_tag "cart_.subscription_autoship_options".to_s, Spree.t(:one_unit_autoship_supply) %>
-	  	</div>
-	  	<div id="cart_checkboxes" class="form-group">
-	    	<%= radio_button_tag :cart, ".add-to-cart_bff", true, class: "cart_radio_button" %>
-	    	<%= label_tag "cart_.add-to-cart".to_s, Spree.t(:buy_for_friend), id: "cart_.add-to-cart_bff" %>
-	  	</div>
-	  	<% if @product.is_sample %>
-	  	<div id="cart_checkboxes" class="form-group">
-	    	<%= radio_button_tag :cart, ".add-to-cart_trial", class: "cart_radio_button" %>
-	    	<%= label_tag "cart_.add-to-cart_trial".to_s, Spree.t(:sample), id: "cart_.add-to-cart_trial" %>
-	  	</div>
+	  	<% @Purchaseoptions.each_with_index do |p,index| %>
+	  		<% if p.promo_code == 'JUSTONCE' %>
+			  	<div id="cart_checkboxes" class="form-group">
+			    	<%= radio_button_tag :cart, ".add-to-cart", true, class: "cart_radio_button" %>
+			    	<%= label_tag "cart_.add-to-cart".to_s, Spree.t(:one_month_supply), id: "cart_.add-to-cart" %>
+			  	</div>
+			<% elsif p.promo_code == 'THREE90' %>
+			  	<div id="subscription_checkboxes" class="form-group">
+			    	<%= radio_button_tag :cart, ".subscription_options", false, class: "cart_radio_button" %>
+			    	<%= label_tag "cart_.subscription_options".to_s, Spree.t(:three_month_supply) %>
+			  	</div>
+			<% elsif p.promo_code == 'AUTOSHIP10' %>
+			  	<div id="subscription_checkboxes" class="form-group">
+			    	<%= radio_button_tag :cart, ".subscription_autoship_options", false, class: "cart_radio_button" %>
+			    	<%= label_tag "cart_.subscription_autoship_options".to_s, Spree.t(:one_unit_autoship_supply) %>
+			  	</div>
+			<% elsif p.promo_code == 'BUYFF' %>
+			  	<div id="cart_checkboxes" class="form-group">
+			    	<%= radio_button_tag :cart, ".add-to-cart_bff", true, class: "cart_radio_button" %>
+			    	<%= label_tag "cart_.add-to-cart".to_s, Spree.t(:buy_for_friend), id: "cart_.add-to-cart_bff" %>
+			  	</div>
+			<% else %>
+				<% if @product.is_sample %>
+				  	<div id="cart_checkboxes" class="form-group">
+				    	<%= radio_button_tag :cart, ".add-to-cart_trial", class: "cart_radio_button" %>
+				    	<%= label_tag "cart_.add-to-cart_trial".to_s, Spree.t(:sample), id: "cart_.add-to-cart_trial" %>
+				  	</div>
+				<% elsif p.promo_code != 'TRIAL' %>
+					<div id="cart_checkboxes" class="form-group">
+						<%= radio_button_tag :cart, p.id, true, class: "cart_radio_button" %>
+						<%= label_tag ("cart_.add-to-cart_"+p.id.to_s).to_s, p.name, id: "cart_.add-to-cart_"+p.id.to_s %>
+					</div>
+			  	<% end %>
+			<% end %>
 	  	<% end %>
 	<% end %>
 <% end %>
