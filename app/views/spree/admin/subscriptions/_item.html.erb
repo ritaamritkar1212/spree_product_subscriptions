@@ -32,14 +32,19 @@
           <td class="line-item-price text-center">
             <div data-hook="admin_subscription_price_form" data-subscription-id="<%= @subscription.id %>">
               <%= f.field_container :price, class: ["form-group"] do %>
-                <%= text_field_tag variant.price, variant.price, class: "form-control", disabled: @subscription.not_changeable? %>
-                <%= f.error_message_on :price %>
+                <%= f.fields_for :variants do |v| %>
+                  <%= v.text_field 'price', class: "form-control", disabled: @subscription.not_changeable? if v.object.id == variant.id%>
+                  <% end %>
               <% end %>
             </div>
           </td>
           <td class="line-item-qty-show text-center">
             <div data-hook="admin_subscription_quantity_form">
-              <%= number_field_tag 'quantity', @var_sub.quantity, { min: 1, disabled: @subscription.not_changeable? } %>
+            <%= f.field_container :quantity, class: ["form-group"] do %>
+            <%= f.fields_for :variants_subscriptions do |ff| %>
+                <%= ff.number_field 'quantity', { min: 1, disabled: @subscription.not_changeable? } if ff.object.variant_id == variant.id %>
+              <% end %>
+            <% end %>
             </div>
           </td>
           <%if index == 0 %>
