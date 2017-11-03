@@ -8,6 +8,7 @@ Spree::Core::Engine.routes.draw do
         patch :unpause
         get :cancellation
         patch :cancel
+        post :add_product
       end
     end
   end

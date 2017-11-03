@@ -26,6 +26,10 @@ module Spree
     has_many :orders, through: :orders_subscriptions
     has_many :complete_orders, -> { complete }, through: :orders_subscriptions, source: :order
 
+    has_many :variants_subscriptions, class_name: "Spree::VariantSubscription", dependent: :destroy
+    has_many :variants, through: :variants_subscriptions
+    accepts_nested_attributes_for :variants_subscriptions
+
     self.whitelisted_ransackable_associations = %w( parent_order )
 
     scope :paused, -> { where(paused: true) }

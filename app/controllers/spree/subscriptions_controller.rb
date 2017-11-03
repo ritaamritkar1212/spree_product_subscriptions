@@ -72,6 +72,7 @@ module Spree
       end
     end
 
+
     private
 
       def subscription_attributes

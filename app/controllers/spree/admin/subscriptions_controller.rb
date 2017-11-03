@@ -46,6 +46,27 @@ module Spree
         end
       end
 
+      def add_product
+        quantity = params[:quantity].to_i
+        @variant = Spree::Variant.find(params[:variant_id].to_i)
+        if @subscription.variants.include? @variant
+          @var_sub = Spree::VariantSubscription.where("subscription_id= ? && variant_id=?", @subscription.id,params[:variant_id].to_i).first
+          @var_sub.quantity.nil? ? @var_sub.quantity = quantity :  @var_sub.quantity += quantity 
+          @var_sub.save!
+        else
+          @subscription.variants << @variant
+          @var_sub = Spree::VariantSubscription.where("subscription_id= ? && variant_id=?", @subscription.id,params[:variant_id].to_i).first
+          @var_sub.quantity = quantity
+          @var_sub.save!
+          @subscription.save!
+        end
+        respond_to do |format|
+          format.html { render :action => 'edit' }
+        end
+        #respond_with(@subscription, :status => :updated, default_template: :edit)
+      end
+
+
       private
 
         def cancel_subscription_attributes
