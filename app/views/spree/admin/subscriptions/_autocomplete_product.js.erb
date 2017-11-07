@@ -3,7 +3,6 @@
   <label><%= Spree.t(:select_stock) %></label>
   <table class="table table-condensed table-bordered stock-levels no-marginb" data-hook="stock-levels">
     <thead>
-      <th><%= Spree.t(:price) %></th>
       <th width="15%"><%= Spree.t(:quantity) %></th>
       <th class="actions"></th>
     </thead>
@@ -11,7 +10,6 @@
       {{#each variant.stock_items}}
         <tr>
           {{#unless ../variant.track_inventory}}
-            <td></td>
             <td>
               <input class="quantity form-control input-sm" id="stock_item_quantity" data-stock-location-id="{{this.stock_location_id}}" type="number" min="1" value="1">
             </td>
@@ -22,9 +20,7 @@
             </td>
           {{else}}
             {{#if this.available}}
-              <td>
-                {{variant.price}}
-              </td>
+
               <td>
                 <input class="quantity form-control input-sm" id="stock_item_quantity" data-stock-location-id="{{this.stock_location_id}}" type="number" min="1" value="1">
               </td>
