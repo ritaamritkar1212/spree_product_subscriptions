@@ -5,6 +5,7 @@ en:
   hello: "Hello world"
 
   spree:
+    customer_email: "Customer Email"
     subscription_notifier:
       notify_confirmation:
         subject: "%{frequency} %{number} Subscription Confirmation"

@@ -1,5 +1,6 @@
 <tr id="<%= spree_dom_id subscription %>" data-hook="admin_subscriptions_index_rows" data-id="<%= subscription.id %>">
   <td><%= link_to subscription.number, edit_admin_subscription_path(subscription) %></td>
+  <td><%= subscription.parent_order.email %></td>
   <td><%= subscription.variant.name %></td>
   <td class="text-center"><%= subscription.price %></td>
   <td class="text-center"><%= subscription.frequency.title.titleize %></td>
